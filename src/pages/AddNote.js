@@ -1,10 +1,12 @@
 import { FormControl, TextField, Button } from "@material-ui/core";
+import { withRouter } from "react-router";
+
 
 function AddNote(props) {
-  const {changePage} = props;
+  const {history} = props;
   const handleCancel = (event) => {
     event.preventDefault();
-    changePage();
+    history.push("/"); // history is a javascript object that enables interaction with browser history API
   }
 
 
@@ -29,4 +31,5 @@ function AddNote(props) {
   );
 }
 
-export default AddNote;
+export default withRouter(AddNote);
+

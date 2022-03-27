@@ -1,6 +1,8 @@
 import { List, Fab, withStyles } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import Note from "../components/Note";
+import { Link } from "react-router-dom";
+
 
 const styles = {
   fab: {
@@ -11,7 +13,7 @@ const styles = {
 };
 
 function DisplayNotes(props) {
-  const { notes, deleteNote, classes, changePage } = props;
+  const { notes, deleteNote, classes } = props;
   return (
     <>
       <List>
@@ -19,12 +21,14 @@ function DisplayNotes(props) {
           return <Note note={note} key={index} deleteNote={deleteNote} />;
         })}
       </List>
-      <Fab 
-        aria-label={"Add"}
-        className={classes.fab}
-        onClick={() => changePage()}>
-        <Add />
-      </Fab>
+      <Link to="/add"> {/* The Link component is similar to the HTML anchor element (<a>). */}
+        <Fab
+          aria-label={"Add"}
+          className={classes.fab}>
+          <Add />
+        </Fab>
+      </Link>
+
     </>
   );
 }
