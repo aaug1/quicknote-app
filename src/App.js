@@ -1,17 +1,6 @@
 import React, { Component } from "react";
-import { Container, List, Fab, withStyles } from "@material-ui/core";
-import { Add } from "@material-ui/icons";
-import Note from "./components/Note.js"
-
-const styles = {
-  fab: {
-    position: 'absolute',
-    bottom: "2rem",
-    right: "2rem",
-  }
-};
-
-
+import { Container } from "@material-ui/core";
+import DisplayNotes from "./pages/DisplayNotes";
 
 class App extends Component {
   constructor(props) {
@@ -51,18 +40,11 @@ class App extends Component {
     const { notes } = this.state;
     return (
       <Container>
-        <List>
-          {notes.map((note, index) => {
-            return  <Note note={note} key={index} deleteNote={this.deleteNote} />; /* Passes in note and key and delete note */
-          })}
-        </List>
-        <Fab aria-label={"Add"} className={this.props.classes.fab}>
-          <Add /> {/* add button */}
-        </Fab>
+        <DisplayNotes notes={notes} deleteNote={this.deleteNote} />
       </Container>
     );
   }
 
 }
 
-export default withStyles(styles)(App); // Notice that we export with style!
+export default App;
