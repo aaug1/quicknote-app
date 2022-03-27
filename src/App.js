@@ -27,13 +27,23 @@ class App extends Component {
     };
   }
 
+  /* Delete a note. Takes in a note, and uses setState, which is called with a FUNCTION argument. 
+  this receives the current state, and will return the updated state */
+  deleteNote = (note) => {
+    this.setState((state) => {
+      return {
+        notes: state.notes.filter((n) => n.id !== note.id),
+      };
+    });
+  };
+
   render() {
     const { notes } = this.state;
     return (
       <Container>
         <List>
           {notes.map((note, index) => {
-            return <Note note={note} key={index} />;
+            return  <Note note={note} key={index} deleteNote={this.deleteNote} />; /* Passes in note and key and delete note */
           })}
         </List>
       </Container>
