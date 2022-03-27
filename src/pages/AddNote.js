@@ -1,6 +1,14 @@
 import { FormControl, TextField, Button } from "@material-ui/core";
 
-function AddNote() {
+function AddNote(props) {
+  const {changePage} = props;
+  const handleCancel = (event) => {
+    event.preventDefault();
+    changePage();
+  }
+
+
+
   return (
     <form>
       <FormControl fullWidth> {/* Add Note section (has title and text inputs) */}
@@ -10,7 +18,7 @@ function AddNote() {
         <TextField label="Text" multiline rows={4} variant="outlined" />
       </FormControl>
       <div>
-        <Button type="button" color="secondary">
+        <Button type="button" color="secondary" onClick={handleCancel}>
           Cancel
         </Button>
         <Button type="submit" color="primary">

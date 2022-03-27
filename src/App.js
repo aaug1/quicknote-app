@@ -8,6 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showHomepage: true,
       notes: [
         {
           id: "5c83c052-60da-425f-a302-9d4735a9d6ae",
@@ -38,15 +39,33 @@ class App extends Component {
     });
   };
 
+  /* This will change the page to create a new note */
+  changePage = () => {
+    this.setState((state) => {
+      return {
+        showHomepage: !state.showHomepage,
+      };
+    });
+  };
+
+
   render() {
-    const { notes } = this.state;
+    const { notes, showHomepage } = this.state;
     return (
       <Container>
-        <DisplayNotes notes={notes} deleteNote={this.deleteNote} />
-        <AddNote />
+        {showHomepage ? (
+          <DisplayNotes
+            notes={notes}
+            deleteNote={this.deleteNote}
+            changePage={this.changePage}
+          />
+        ) : (
+          <AddNote changePage={this.changePage} />
+        )}
       </Container>
     );
   }
+
 
 }
 
