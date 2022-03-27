@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { Container } from "@material-ui/core";
 import DisplayNotes from "./pages/DisplayNotes";
 import AddNote from "./pages/AddNote";
+import { Route, Switch } from "react-router";
+
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showHomepage: true,
+      //showHomepage: true, // Not needed anymore due to router component
       notes: [
         {
           id: "5c83c052-60da-425f-a302-9d4735a9d6ae",
@@ -40,6 +42,7 @@ class App extends Component {
   };
 
   /* This will change the page to create a new note */
+  /*
   changePage = () => {
     this.setState((state) => {
       return {
@@ -47,8 +50,9 @@ class App extends Component {
       };
     });
   };
+  */
 
-
+  /* To use when we do not have router
   render() {
     const { notes, showHomepage } = this.state;
     return (
@@ -65,6 +69,24 @@ class App extends Component {
       </Container>
     );
   }
+  */
+
+  render() {
+    const { notes } = this.state;
+    return (
+      <Container>
+        <Switch> {/* Switch component looks through all its children <Route> elements and renders the first one whose path matches the current URL */}
+          <Route exact path="/">
+            <DisplayNotes notes={notes} deleteNote={this.deleteNote} />
+          </Route>
+          <Route path="/add">
+            <AddNote />
+          </Route>
+        </Switch>
+      </Container>
+    );
+  }
+
 
 
 }
