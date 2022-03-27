@@ -4,7 +4,7 @@ import {CssBaseline} from "@material-ui/core";
 
 ReactDOM.render(
   <>
-    <CssBaseline />
+    <CssBaseline /> {/* resets the default styling of browser and normalizes styles */}
     <App />
   </>,
   document.getElementById("root")
