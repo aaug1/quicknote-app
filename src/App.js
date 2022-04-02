@@ -87,7 +87,7 @@ class App extends Component {
       };
     });
   };
-  
+
 
 
   render() {
@@ -99,10 +99,10 @@ class App extends Component {
             <DisplayNotes notes={notes} deleteNote={this.deleteNote} />
           </Route>
           <Route path="/add">
-          <UpsertNote upsertNote={this.addNote} />
+            <UpsertNote upsertNote={this.addNote} />
           </Route>
           <Route path="/edit">
-          <UpsertNote upsertNote={this.editNote} />
+            <UpsertNote upsertNote={this.editNote} />
           </Route>
 
         </Switch>

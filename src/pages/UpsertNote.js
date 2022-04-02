@@ -18,12 +18,23 @@ class UpsertNote extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.location.state.id || undefined,
-      title: this.props.location.state.title || "",
-      text: this.props.location.state.text || "",
+      title: "",
+      text: "",
     };
   }
-  
+
+  componentDidMount() {
+    const { state } = this.props.location;
+    if (state) {
+      const { id, title, text } = state;
+      this.setState({
+        id,
+        title,
+        text,
+      });
+    }
+  }
+
 
   updateTitle = (event) => {
     this.setState({
@@ -40,7 +51,7 @@ class UpsertNote extends Component {
   // Step 8:
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.addNote(this.state);
+    this.props.upsertNote(this.state);
     this.props.history.push("/");
   };
 
@@ -63,16 +74,16 @@ class UpsertNote extends Component {
           />
         </FormControl>
         <Paper elevation={3} style={styles.paper}>
-        <FormControl fullWidth>
-          <TextField
-            label="Text"
-            multiline
-            rows={6}
-            variant="outlined"
-            value={this.state.text}
-            onChange={this.updateText}
-          />
-        </FormControl>
+          <FormControl fullWidth>
+            <TextField
+              label="Text"
+              multiline
+              rows={6}
+              variant="outlined"
+              value={this.state.text}
+              onChange={this.updateText}
+            />
+          </FormControl>
         </Paper>
         <div>
           <Button type="button" color="secondary" onClick={this.handleCancel}>

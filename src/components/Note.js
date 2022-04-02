@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Collapse, List, ListItem, ListItemText, ListItemIcon, Button } from "@material-ui/core"
 import { ExpandLess, ExpandMore, Delete, Edit } from "@material-ui/icons";/* collapsable notes */
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+
 
 class Note extends Component {
   constructor(props) {
@@ -47,7 +49,10 @@ class Note extends Component {
           </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemText secondary={note.text} />
+            <ListItemText
+              disableTypography
+              primary={<ReactMarkdown>{note.text}</ReactMarkdown>}
+            />
           </List>
         </Collapse>
       </>
