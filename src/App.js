@@ -1,8 +1,13 @@
 import React, { Component } from "react";
-import { Container } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
 import DisplayNotes from "./pages/DisplayNotes";
 import UpsertNote from "./pages/UpsertNote";
 import { Route, Switch } from "react-router";
+import { Link } from "react-router-dom";
+import { Edit } from "@material-ui/icons";/* collapsable notes */
+import { v4 as uuidv4 } from "uuid";
+
+
 
 
 
@@ -75,7 +80,7 @@ class App extends Component {
   addNote = (note) => {
     this.setState((state) => {
       return {
-        notes: [...state.notes, note],
+        notes: [...state.notes, Object.assign(note, { id: uuidv4() })],
       };
     });
   }
@@ -87,6 +92,24 @@ class App extends Component {
       };
     });
   };
+
+
+
+  NoMatch() {
+    return (
+      <div>
+        <h3>
+          404 - Not Found!
+        </h3>
+        
+        <Link to="/">
+            <Button type="button">
+              Return to Course Planner Homepage
+            </Button>
+          </Link>
+      </div>
+    );
+  }
 
 
 
@@ -104,11 +127,16 @@ class App extends Component {
           <Route path="/edit">
             <UpsertNote upsertNote={this.editNote} />
           </Route>
+          <Route path="*">
+            <this.NoMatch />
+          </Route>
 
         </Switch>
       </Container>
     );
   }
+
+
 
 
 

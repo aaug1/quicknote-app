@@ -22,6 +22,7 @@ class UpsertNote extends Component {
       text: "",
     };
   }
+  
 
   componentDidMount() {
     const { state } = this.props.location;
