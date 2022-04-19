@@ -3,6 +3,11 @@ import { Collapse, List, ListItem, ListItemText, ListItemIcon, Button } from "@m
 import { ExpandLess, ExpandMore, Delete, Edit } from "@material-ui/icons";/* collapsable notes */
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+
+
 
 
 class Note extends Component {
@@ -51,7 +56,18 @@ class Note extends Component {
           <List component="div" disablePadding>
             <ListItemText
               disableTypography
-              primary={<ReactMarkdown>{note.text}</ReactMarkdown>}
+              primary={
+                <Box mx={4}>
+                  <Paper elevation={4}>
+                    <Box p={4}>
+                      <ReactMarkdown 
+                        children={note.text} 
+                        remarkPlugins={[remarkGfm]}
+                      />
+                    </Box>
+                  </Paper>
+                </Box>
+            }
             />
           </List>
         </Collapse>
